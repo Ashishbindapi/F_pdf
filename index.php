@@ -1,48 +1,44 @@
 <?php
 
-require('./fpdf/fpdf.php');
+require('fpdf/fpdf.php');
 
 $pdf = new FPDF();
 $pdf->AddPage();
 
-// Set font and font size for the heading
-$pdf->SetFont('Arial', 'B', 25); // 'B' indicates bold
+// Logo
+$pdf->Image('./image/web.png', 10, 10, 30);
 
-$pdf->Cell(0, 18, 'A Simple PDF File', 0, 1, ''); // Add the heading centered
-
-// Reset font for the content
+// Set font for the content
 $pdf->SetFont('Arial', '', 12);
 
-$pdf->Cell(0, 20, 'This is a small demonstration .pdf file -', 0, 1, '');
-$pdf->Cell(0, 0, 'just for use in the Virtual Mechanics tutorials. More text. And more', 0, 1, '');
-$pdf->Cell(0, 8, 'text. And more text. And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 4, 'And more text. And more text. And more text. And more text. And more', 0, 1, '');
-$pdf->Cell(0, 4, 'text. And more text. Boring, zzzzz. And more text. And more text. And', 0, 1, '');
-$pdf->Cell(0, 4, 'more text. And more text. And more text. And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 8, 'And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 4, 'And more text. And more text. And more text. And more text. And more', 0, 1, '');
-$pdf->Cell(0, 4, 'text. And more text. And more text. Even more. Continued on page 2 ...', 0, 1, '');
-$pdf->AddPage();
+// Split the page into two columns
+$column1X = 10;
+$column2X = 110;
+$y = 40; // Starting Y position
 
-// Set font and font size for the heading
-$pdf->SetFont('Arial', 'B', 25); // 'B' indicates bold
+$pdf->SetXY($column1X, $y);
+$pdf->MultiCell(90, 10, "Line 1\nLine 2\nLine 3\nLine 4\n");
+$column1Height = $pdf->GetY();
 
-$pdf->Cell(0, 18, 'Simple PDF File 2', 0, 1, ''); // Add the heading centered
+// Chapter 2 content in column 2
+$pdf->SetXY($column2X, 40); // Reset Y position to the top
+$pdf->MultiCell(0, 10, "Line 1\nLine 2\nLine 3\nLine 4\n \nLine 1");
+$y = $pdf->GetY();
 
-// Reset font for the content
-$pdf->SetFont('Arial', '', 12);
+$column2Height = $pdf->GetY();
 
-$pdf->Cell(0, 4, '...continued from page 1. Yet more text. And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 4, 'And more text. And more text. And more text. And more text. And more', 0, 1, '');
-$pdf->Cell(0, 4, 'text. Oh, how boring typing this stuff. But not as boring as watching', 0, 1, '');
-$pdf->Cell(0, 4, 'Boring. More, a little more text. The end, and just as well.', 0, 1, '');
+// Set the final page height based on the taller column
+$pageHeight = max($column1Height, $column2Height);
 
+// Output the PDF with adjusted page height
+$pdf->SetAutoPageBreak(true, $pageHeight);
 
-// Set the file path for the PDF
-$pdfFilePath = $_SERVER['DOCUMENT_ROOT'] . '/F_pdf/sample.pdf';
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(0, 10, 'This is heading', 0, 1, '');
 
-// Output the PDF to the specified file path
-$pdf->Output($pdfFilePath, 'F'); // 'F' means save to a file
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(0, 10, 'Multiple line text goes here. You can write as much text as you want', 0, 1, '');
 
-// Display a success message
-echo "PDF created successfully!";
+$pdfFilePath = $_SERVER['DOCUMENT_ROOT'] . '/F_pdf2/sample.pdf';
+
+$pdf->Output($pdfFilePath, 'I');
