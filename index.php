@@ -13,16 +13,16 @@ $pdf->SetFont('Arial', '', 12);
 
 // Split the page into two columns
 $column1X = 10;
-$column2X = 110;
+$column2X = 90;
 $y = 40; // Starting Y position
 
 $pdf->SetXY($column1X, $y);
-$pdf->MultiCell(90, 10, "Line 1\nLine 2\nLine 3\nLine 4\n");
+$pdf->MultiCell(40, 8, "Line 1\nLine 2\nLine 3\nLine 4\n");
 $column1Height = $pdf->GetY();
 
 // Chapter 2 content in column 2
 $pdf->SetXY($column2X, 40); // Reset Y position to the top
-$pdf->MultiCell(0, 10, "Line 1\nLine 2\nLine 3\nLine 4\n \nLine 1");
+$pdf->MultiCell(0, 8, "Line 1\nLine 2\nLine 3\nLine 4\n \nLine 1");
 $y = $pdf->GetY();
 
 $column2Height = $pdf->GetY();
