@@ -20,8 +20,7 @@ $pdf->SetXY($column1X, $y);
 $pdf->MultiCell(40, 8, "Line 1\nLine 2\nLine 3\nLine 4\n");
 $column1Height = $pdf->GetY();
 
-// Chapter 2 content in column 2
-$pdf->SetXY($column2X, $y); // Reset Y position to the top
+$pdf->SetXY($column2X, $y);
 $pdf->MultiCell(0, 8, "Line 1\nLine 2\nLine 3\nLine 4\n \nLine 1");
 $pdf->GetY();
 
