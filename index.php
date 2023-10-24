@@ -41,4 +41,6 @@ $pdf->Cell(0, 10, 'Multiple line text goes here. You can write as much text as y
 
 $pdfFilePath = $_SERVER['DOCUMENT_ROOT'] . '/F_pdf2/sample.pdf';
 
-$pdf->Output($pdfFilePath, 'I');
+$pdf->Output($pdfFilePath,'F');
+
+echo "PDF created successfully!";
