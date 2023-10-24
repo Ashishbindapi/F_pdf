@@ -6,7 +6,7 @@ $pdf = new FPDF();
 $pdf->AddPage();
 
 // Logo
-$pdf->Image('./image/web.png', 10, 10, 30);
+$pdf->Image('./image/web.png', 10, 10, 35);
 
 // Set font for the content
 $pdf->SetFont('Arial', '', 12);
