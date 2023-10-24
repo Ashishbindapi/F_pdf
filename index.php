@@ -17,11 +17,11 @@ $column2X = 90;
 $y = 40; // Starting Y position
 
 $pdf->SetXY($column1X, $y);
-$pdf->MultiCell(40, 8, "Line 1\nLine 2\nLine 3\nLine 4\n");
+$pdf->MultiCell(40, 8, "\nLine 1\nLine 2\nLine 3\nLine 4\n");
 $column1Height = $pdf->GetY();
 
 $pdf->SetXY($column2X, $y);
-$pdf->MultiCell(0, 8, "Line 1\nLine 2\nLine 3\nLine 4\n \nLine 1");
+$pdf->MultiCell(0, 8, "\nLine 1\nLine 2\nLine 3\nLine 4\n \nLine 1");
 $pdf->GetY();
 
 $column2Height = $pdf->GetY();
@@ -32,10 +32,10 @@ $pageHeight = max($column1Height, $column2Height);
 // Output the PDF with adjusted page height
 $pdf->SetAutoPageBreak(true, $pageHeight);
 
-$pdf->SetFont('Arial', 'B', 12);
+$pdf->SetFont('Arial', 'B', 13);
 $pdf->Cell(0, 10, 'This is heading', 0, 1, '');
 
-$pdf->SetFont('Arial', '', 10);
+$pdf->SetFont('Arial', '', 11);
 $pdf->Cell(0, 10, 'Multiple line text goes here. You can write as much text as you want', 0, 1, '');
 
 $pdfFilePath = $_SERVER['DOCUMENT_ROOT'] . '/F_pdf2/sample.pdf';
